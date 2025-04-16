@@ -5,7 +5,6 @@ import transporter from '../config/nodemailer.js';
 
 
 export const register = async (req, res) => { 
-    console.log(req.body);
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
         return res.json(400).json({success: false, message: "All fields are required"});
@@ -198,3 +197,30 @@ export const resetPassword = async (req, res) => {
         res.json({success: false, message: error.message});
     }
 }
+
+
+/*
+export const login = async (req, res) => {
+    const {email, password} = req.body
+    if(!email || !password){
+        return res.json({success:false, message: "All field are required"})
+    }
+    try {
+        const user = await userModel.findOne({email})
+        if(!user){
+            return res.json({success:false, message:"User is not exist"})
+        }
+        const isPasswordMatch = await bcrypt.compare(password, user.password)
+        if(!isPasswordMatch){
+            return res.json({success:false, message:"Invalid credentials"})
+        }
+        return res.status(200).json({success:true, message:"User logged in!!"})
+        
+    } catch (error) {
+            res.json({
+                success:false, 
+                message:error.message
+            })
+    }
+}
+*/
